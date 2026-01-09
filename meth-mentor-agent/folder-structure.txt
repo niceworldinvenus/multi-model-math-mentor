@@ -1,0 +1,18 @@
+
+math-mentor-app/
+│
+├── data/
+│   └── jee-math-notes.pdf
+│
+├── src/
+│   ├── agents/
+│   └── image_audio_input.py
+│
+├── vectorstore/
+│   └── chromadb/
+│
+├── app.py
+├── data_ingestion.py
+├── .env
+├── folder-structure.txt
+└── requirements.txt
