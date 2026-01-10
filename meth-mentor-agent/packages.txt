@@ -1,0 +1,11 @@
+# For Image Processing and OCR (Pix2Text/OpenCV)
+libgl1
+libglib2.0-0
+tesseract-ocr
+libtesseract-dev
+
+# For Audio Processing (Faster-Whisper/FFmpeg)
+ffmpeg
+
+# General build tools
+build-essential
