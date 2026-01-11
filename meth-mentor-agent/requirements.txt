@@ -1,0 +1,25 @@
+# --- Core Framework & UI ---
+streamlit
+langgraph
+pydantic
+python-dotenv
+
+# --- LangChain Ecosystem ---
+langchain
+langchain-core
+langchain-groq
+langchain-huggingface
+langchain-chroma
+
+# --- Document Processing & RAG ---
+pymupdf4llm
+sentence-transformers
+
+# --- Multimodal (Image & Audio) ---
+pix2text
+faster-whisper
+streamlit-mic-recorder
+
+# --- Utilities ---
+pathlib
+uuid
