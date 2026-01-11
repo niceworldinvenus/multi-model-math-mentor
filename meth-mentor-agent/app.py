@@ -31,7 +31,7 @@ if "current_run_logs" not in st.session_state:
     st.session_state.current_run_logs = []
 
 title_container = st.container()
-chat_container = st.container(height=400,) 
+chat_container = st.container(height=350,) 
 footer_container = st.container()
 
 # cache chromadb instance
@@ -421,3 +421,4 @@ with footer_container:
             st.rerun()
 
     
+
