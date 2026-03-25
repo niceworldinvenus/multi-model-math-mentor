@@ -2,8 +2,8 @@
 import streamlit as st
 import uuid
 import os
-from src.image_audio_input import img_to_text,audio_to_text
-from streamlit_mic_recorder import mic_recorder
+# from src.image_audio_input import img_to_text,audio_to_text
+# from streamlit_mic_recorder import mic_recorder
 from src.agents.agent_graph import app
 from pathlib import Path
 from langchain_huggingface import HuggingFaceEmbeddings
@@ -169,91 +169,91 @@ with st.sidebar:
     st.title("🛠️ Mentor Tools")
     
     # 1. Selection for input method
-    choice = st.radio(
-        "Select Input Method:",
-        ["⌨️ Text", "🖼️ Image", "🎤 Audio"]
-    )
+    # choice = st.radio(
+    #     "Select Input Method:",
+    #     ["⌨️ Text", "🖼️ Image", "🎤 Audio"]
+    # )
     
   
 
     # --- Conditional Logic for "inputs" ---
     # text input
-    if choice == "⌨️ Text":
-        st.subheader("Text Input")
-        st.info("Simply type your problem in the main text area.")
+    # if choice == "⌨️ Text":
+    #     st.subheader("Text Input")
+    #     st.info("Simply type your problem in the main text area.")
 
     # image input
-    elif choice == "🖼️ Image":
-        st.subheader("Image Upload")
-        uploaded_image = st.file_uploader("Upload an image:", type=["jpg", "png", "jpeg"])
-        if uploaded_image is not None:
+    # elif choice == "🖼️ Image":
+    #     st.subheader("Image Upload")
+    #     uploaded_image = st.file_uploader("Upload an image:", type=["jpg", "png", "jpeg"])
+    #     if uploaded_image is not None:
 
-            # 2. Save it to a temporary file
-            temp_img_path = "temp_problem_img.jpg"
-            with open(temp_img_path, "wb") as f:
-                f.write(uploaded_image.getbuffer())
+    #         # 2. Save it to a temporary file
+    #         temp_img_path = "temp_problem_img.jpg"
+    #         with open(temp_img_path, "wb") as f:
+    #             f.write(uploaded_image.getbuffer())
 
-            # 3. Trigger the OCR (Optical Character Recognition)
-            if st.button("🔍 Extract Text from Image"):
-                with st.spinner("Reading the math"):
-                    # Use your Pix2Text function
-                    extracted_text = img_to_text(temp_img_path)
+    #         # 3. Trigger the OCR (Optical Character Recognition)
+    #         if st.button("🔍 Extract Text from Image"):
+    #             with st.spinner("Reading the math"):
+    #                 # Use your Pix2Text function
+    #                 extracted_text = img_to_text(temp_img_path)
                     
-                    # Pop it into the session state for the text area
-                    st.session_state.bottom_input = extracted_text
-                    st.success("Text extracted!")
-                    if os.path.exists(temp_img_path):
-                        os.remove(temp_img_path)
+    #                 # Pop it into the session state for the text area
+    #                 st.session_state.bottom_input = extracted_text
+    #                 st.success("Text extracted!")
+    #                 if os.path.exists(temp_img_path):
+    #                     os.remove(temp_img_path)
 
-                    st.rerun()    
+    #                 st.rerun()    
 
     # audio input
-    elif choice == "🎤 Audio":
-        st.subheader("Voice Input")                    
+    # elif choice == "🎤 Audio":
+    #     st.subheader("Voice Input")                    
 
-        uploaded_audio = st.file_uploader("Upload an audio file:", type=["mp3", "wav", "m4a"])
-        if uploaded_audio is not None:
-            if st.button("🔊 Transcribe Uploaded Audio"):
-                with st.spinner("Transcribing file..."):
-                    # Save uploaded file temporarily
-                    with open("temp_upload.wav", "wb") as f:
-                        f.write(uploaded_audio.getbuffer())
+    #     uploaded_audio = st.file_uploader("Upload an audio file:", type=["mp3", "wav", "m4a"])
+    #     if uploaded_audio is not None:
+    #         if st.button("🔊 Transcribe Uploaded Audio"):
+    #             with st.spinner("Transcribing file..."):
+    #                 # Save uploaded file temporarily
+    #                 with open("temp_upload.wav", "wb") as f:
+    #                     f.write(uploaded_audio.getbuffer())
                     
-                    # Process and update
-                    transcribed_text = audio_to_text("temp_upload.wav")
-                    st.session_state.bottom_input = transcribed_text
-                    st.success("Transcription complete!")
-                    if os.path.exists('temp_upload.wav'):
-                        os.remove('temp_upload.wav')
-                    st.rerun()    
+    #                 # Process and update
+    #                 transcribed_text = audio_to_text("temp_upload.wav")
+    #                 st.session_state.bottom_input = transcribed_text
+    #                 st.success("Transcription complete!")
+    #                 if os.path.exists('temp_upload.wav'):
+    #                     os.remove('temp_upload.wav')
+    #                 st.rerun()    
                     
         # 2. Handle Live Recording
-        st.write("Or record your question live:")
-        audio = mic_recorder(
-            start_prompt="⏺️ Start Recording",
-            stop_prompt="⏹️ Stop Recording",
-            key='recorder'
-        )
+        # st.write("Or record your question live:")
+        # audio = mic_recorder(
+        #     start_prompt="⏺️ Start Recording",
+        #     stop_prompt="⏹️ Stop Recording",
+        #     key='recorder'
+        # )
 
-        if audio:
+        # if audio:
             # Check if  a new recording to process
-            current_id = audio.get('id')
-            if "last_audio_id" not in st.session_state or st.session_state.last_audio_id != current_id:
-                with st.spinner("Transcribing your voice... 🎤"):
-                    # Save bytes to a temp wav file
-                    with open("temp_mic.wav", "wb") as f:
-                        f.write(audio['bytes'])
+            # current_id = audio.get('id')
+            # if "last_audio_id" not in st.session_state or st.session_state.last_audio_id != current_id:
+            #     with st.spinner("Transcribing your voice... 🎤"):
+            #         # Save bytes to a temp wav file
+            #         with open("temp_mic.wav", "wb") as f:
+            #             f.write(audio['bytes'])
                     
-                    # Run your Whisper function
-                    result = audio_to_text("temp_mic.wav")
+            #         # Run your Whisper function
+            #         result = audio_to_text("temp_mic.wav")
                     
-                    # Update state and "remember" this ID so don't repeat
-                    st.session_state.bottom_input = result
-                    st.session_state.last_audio_id = current_id
-                    st.success("Transcription complete!")
-                    if os.path.exists('temp_mic.wav'):
-                        os.remove('temp_mic.wav')
-                    st.rerun()    
+            #         # Update state and "remember" this ID so don't repeat
+            #         st.session_state.bottom_input = result
+            #         st.session_state.last_audio_id = current_id
+            #         st.success("Transcription complete!")
+            #         if os.path.exists('temp_mic.wav'):
+            #             os.remove('temp_mic.wav')
+            #         st.rerun()    
 
     st.divider()
     if st.button("🗑️ Clear Chat History", use_container_width=True):
