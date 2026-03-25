@@ -15,10 +15,7 @@ langchain-chroma
 pymupdf4llm
 sentence-transformers
 
-# --- Multimodal (Image & Audio) ---
-pix2text
-faster-whisper
-streamlit-mic-recorder
+
 
 # --- Utilities ---
 pathlib
